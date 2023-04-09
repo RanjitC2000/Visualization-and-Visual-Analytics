@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pokemon Visualization</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+  </head>
+  <body style="margin-top: 2%;margin-right: 2%;margin-bottom: 2%;">
+    <div class="container">
+      <h2>Pokemon Visualization</h1>
+    </div>
+    <div class="container">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-secondary" onclick="loadVis1()">Bar Chart</button>
+        <button type="button" class="btn btn-secondary" onclick="loadVis2()">Histogram</button>
+        <button type="button" class="btn btn-secondary" onclick="loadVis3()">Scatter Plot</button>
+        <button type="button" class="btn btn-danger" onclick="clearall()">Clear</button>
+      </div>
+    </div>
+    <button id="toggle-button" class="btn btn-primary toggle-button" style="float: right">Toggle Orientation</button>
+    <div class="container" id="vis"></div>
+    <script>
+      var count = 1;
+      var x_feature = "speed";
+      var y_feature = "weight_kg";
+    
+      
+      function loadVis1() {
+        if (count == 1){
+        d3.select("#vis").append("select").attr("id", "feature").attr("onchange", "loadVis1()");
+        d3.select("#feature").append("option").attr("value", "none").text("none");
+        d3.select("#feature").append("option").attr("value", "base_egg_steps").text("Base steps to hatch");
+        d3.select("#feature").append("option").attr("value", "base_happiness").text("Base happiness");
+        d3.select("#feature").append("option").attr("value", "experience_growth").text("Experience growth");
+        d3.select("#feature").append("option").attr("value", "type1").text("Pokemon Type 1");
+        d3.select("#feature").append("option").attr("value", "type2").text("Pokemon Type 2");
+        d3.select("#feature").append("option").attr("value", "generation").text("Generation");
+        d3.select("#feature").append("option").attr("value", "is_legendary").text("Legendary");
+        count = 0;
+        }
+
+        var feature = d3.select("#feature").property("value");
+        d3.select("#vis").selectAll("svg").remove();
+        d3.select("#vis").selectAll("svg").remove();
+        if (feature != "none") {
+          d3.select("svg").remove();
+          d3.select("#vis").append("script").attr("src", "vis.js");
+        }
+      }
+      function loadVis2() {
+
+        if (count == 1){
+        d3.select("#vis").append("select").attr("id", "feature").attr("onchange", "loadVis2()").attr("data-style", "btn-primary");
+        d3.select("#feature").append("option").attr("value", "none").text("none");
+        d3.select("#feature").append("option").attr("value", "attack").text("Attack Damage");
+        d3.select("#feature").append("option").attr("value", "base_total").text("Base Total");
+        d3.select("#feature").append("option").attr("value", "defense").text("Defense");
+        d3.select("#feature").append("option").attr("value", "height_m").text("Height");
+        d3.select("#feature").append("option").attr("value", "hp").text("Hitpoints");
+        d3.select("#feature").append("option").attr("value", "sp_attack").text("Special Attack");
+        d3.select("#feature").append("option").attr("value", "sp_defense").text("Special Defense");
+        d3.select("#feature").append("option").attr("value", "speed").text("Speed");
+        d3.select("#feature").append("option").attr("value", "weight_kg").text("Weight");
+        count = 0;
+        }
+        var feature = d3.select("#feature").property("value");
+        d3.select("#vis").selectAll("svg").remove();
+        if (feature != "none") {
+          d3.select("svg").remove();
+          d3.select("#vis").append("script").attr("src", "vis2.js");
+        }
+      }
+      function loadVis3() {
+        
+        if (count == 1) {
+          d3.select("#vis").append("div").attr("id", "radio");
+          d3.select("#radio").append("input").attr("type", "radio").attr("name", "axis").attr("value", "x").attr("checked", "true");
+          d3.select("#radio").append("label").text("X Axis");
+          d3.select("#radio").append("input").attr("type", "radio").attr("name", "axis").attr("value", "y");
+          d3.select("#radio").append("label").text("Y Axis");
+          d3.select("#vis").append("select").attr("id", "feature").attr("onchange", "loadVis3()");
+          d3.select("#feature").append("option").attr("value", "none").text("none");
+          d3.select("#feature").append("option").attr("value", "attack").text("Attack Damage");
+          d3.select("#feature").append("option").attr("value", "base_total").text("Base Total");
+          d3.select("#feature").append("option").attr("value", "defense").text("Defense");
+          d3.select("#feature").append("option").attr("value", "height_m").text("Height");
+          d3.select("#feature").append("option").attr("value", "hp").text("Hitpoints");
+          d3.select("#feature").append("option").attr("value", "sp_attack").text("Special Attack");
+          d3.select("#feature").append("option").attr("value", "sp_defense").text("Special Defense");
+          d3.select("#feature").append("option").attr("value", "speed").text("Speed");
+          d3.select("#feature").append("option").attr("value", "weight_kg").text("Weight");
+          count = 0;
+        } 
+
+        var feature = d3.select("#feature").property("value");
+        var axis = d3.select("input[name='axis']:checked").property("value");
+        if (axis == "x") {
+          x_feature = feature;
+        } if (axis == "y") {
+          y_feature = feature;
+        }
+        
+        if (feature != "none") {
+          d3.select("svg").remove();
+          d3.select("#vis").append("script").attr("src", "vis5.js");
+        }
+      }
+      function clearall() {
+        count = 1;
+        d3.select("svg").remove();
+        d3.select("#vis").selectAll("select").remove();
+        d3.select("div").select("#tooltip").remove();
+        d3.select("button").select("#toggle-button").remove();
+        d3.select("#radio").remove();
+        d3.select("#toggle-button").classed("toggle-button-active", false);
+        x_feature = "speed";
+        y_feature = "weight_kg";
+      }
+    </script> 
+  </body>
+</html>

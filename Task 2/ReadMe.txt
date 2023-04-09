@@ -1,0 +1,1 @@
+The Code zip has the Flask backend content in app.py file and the Frontend code is inside the templates Folder the data is present in the static/data folder

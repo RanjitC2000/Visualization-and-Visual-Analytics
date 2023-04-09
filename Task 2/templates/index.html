@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Pokemon Visualization</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body style="margin-top: 0.75%;margin-right: 2%;margin-bottom: 0.75%;">
+  <div class="container">
+    <h3>
+    <img src="static/logo.png" alt="pokemon" width="300" height="60">
+    <div>
+      &emsp;&emsp;&ensp;Visualization
+    </div>
+    </h3>
+  </div>
+  <div class="container">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-secondary" onclick="screeplot()">Scree Plot</button>
+      <button type="button" class="btn btn-secondary" onclick="BiPlot()">BiPlot</button>
+      <button type="button" class="btn btn-secondary" onclick="scatterPlot()">Scatter Plot</button>
+      <button type="button" class="btn btn-secondary" onclick="mdsPlot()">MDS Data Plot</button> 
+      <button type="button" class="btn btn-secondary" onclick="PCPPlot()">PCP Plot</button>
+      <button type="button" class="btn btn-secondary" onclick="mdsVarPlot()">MDS Variable Plot</button>
+      <button type="button" class="btn btn-secondary" onclick="elbow()">Elbow Plot</button>
+      <button type="button" class="btn btn-danger" onclick="clearall()">Clear</button>
+    </div>
+  </div>
+    <div>&nbsp;</div>
+    <div id="table"></div>
+    <div id="tool_tip"></div>
+    <div id="plotting" style="display: flex;flex-direction: row;"> 
+      <div id="plot"></div>
+      <div id="plotpcp"></div>
+    </div>
+    <script>
+        function screeplot() {
+            d3.select("#plot").selectAll("*").remove();
+            d3.select("#table").selectAll("*").remove();
+            d3.select("#plotpcp").selectAll("*").remove();
+            d3.select("#plot").append("script").attr("src", "static/js/screePlot.js");
+        }
+        function BiPlot() {
+            d3.select("#plot").selectAll("*").remove();
+            d3.select("#table").selectAll("*").remove();
+            d3.select("#plotpcp").selectAll("*").remove();
+            d3.select("#plot").append("script").attr("src", "static/js/biplot.js");
+        }
+        function scatterPlot() {
+            d3.select("#plot").selectAll("*").remove();
+            d3.select("#table").selectAll("*").remove();
+            d3.select("#plotpcp").selectAll("*").remove();
+            d3.select("#plot").append("script").attr("src", "static/js/scatterplot.js");
+        }
+        function elbow() {
+            d3.select("#plot").selectAll("*").remove();
+            d3.select("#table").selectAll("*").remove();
+            d3.select("#plotpcp").selectAll("*").remove();
+            d3.select("#plot").append("script").attr("src", "static/js/elbow.js");
+        }
+        function mdsPlot() {
+            d3.select("#plot").selectAll("*").remove();
+            d3.select("#table").selectAll("*").remove();
+            d3.select("#plotpcp").selectAll("*").remove();
+            d3.select("#plot").append("script").attr("src", "static/js/mds.js");
+        }
+        function mdsVarPlot() {
+            d3.select("#plot").selectAll("*").remove();
+            d3.select("#table").selectAll("*").remove();
+            d3.select("#plotpcp").selectAll("*").remove();
+            d3.select("#plot").append("script").attr("src", "static/js/mdsVar.js");
+        }
+        function PCPPlot() {
+            d3.select("#plot").selectAll("*").remove();
+            d3.select("#table").selectAll("*").remove();
+            d3.select("#plotpcp").selectAll("*").remove();
+            d3.select("#plot").append("script").attr("src", "static/js/pcp.js");
+        }
+        function clearall() {
+            d3.select("#plot").selectAll("*").remove();
+            d3.select("#table").selectAll("*").remove();
+            d3.select("#plotpcp").selectAll("*").remove();
+        }
+    </script>
+</body>
+</html>
